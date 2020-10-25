@@ -258,11 +258,6 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.24, 0.18], [0.04, 0.03]]
       ret.mass = 3800. * CV.LB_TO_KG + STD_CARGO_KG
       ret.lateralTuning.pid.kfV = [0.00004]
-      for fw in car_fw:
-        if fw.ecu == "eps" and fw.fwVersion == b"8965B42170\x00\x00\x00\x00\x00\x00":
-          ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25, 0.55], [0.05, 0.1]]
-          ret.lateralTuning.pid.kfV = [0.00007818594]
-          break
 
 
     elif candidate == CAR.COROLLA_TSS2:
