@@ -293,7 +293,7 @@ class CarInterface(CarInterfaceBase):
       ret.longitudinalTuning.kpV = [0.25, 0.3, 0.325]  # braking tune from rav4h
       ret.longitudinalTuning.kiV = [0.068, 0.10]
       stop_and_go = True
-      ret.safetyParam = 55
+      ret.safetyParam = 53
       ret.wheelbase = 2.63906
       ret.steerRatio = 13.9
       tire_stiffness_factor = 0.444  # not optimized yet
@@ -307,11 +307,11 @@ class CarInterface(CarInterfaceBase):
         #ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kiV = [[0.0, 15.5, 21.0, 29.0], [0.005, 0.015, 0.015, 0.1]]
         #ret.lateralTuning.pid.kfBP, ret.lateralTuning.pid.kfV = [[0.0, 15.5, 21.0, 29.0], [0.00009, 0.00015, 0.00015, 0.00007818594]]
         ret.lateralTuning.init('indi')
-        ret.lateralTuning.indi.innerLoopGain = 6
-        ret.lateralTuning.indi.outerLoopGainBP = [0, 20, 21]
-        ret.lateralTuning.indi.outerLoopGainV = [6, 6, 15]
+        ret.lateralTuning.indi.innerLoopGain = 9.0
+        ret.lateralTuning.indi.outerLoopGainBP = [20, 21]
+        ret.lateralTuning.indi.outerLoopGainV = [5.0, 8.75]
         ret.lateralTuning.indi.timeConstant = 5.5
-        ret.lateralTuning.indi.actuatorEffectiveness = 6.0
+        ret.lateralTuning.indi.actuatorEffectiveness = 9.0
       else:
         ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.5], [0.1]]
         ret.lateralTuning.pid.kfV = [0.00007818594]
