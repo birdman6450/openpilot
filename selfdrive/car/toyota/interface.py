@@ -224,6 +224,9 @@ class CarInterface(CarInterfaceBase):
       tire_stiffness_factor = 0.7933
       ret.longitudinalTuning.kpV = [2.65, 1.5, 0.34]
       ret.longitudinalTuning.kiV = [0.54, 0.34]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.13], [0.05]]
+      ret.mass = 3370. * CV.LB_TO_KG + STD_CARGO_KG
+      ret.lateralTuning.pid.kfV = [0.00007818594]
       for fw in car_fw:
         if fw.ecu == "eps" and fw.fwVersion == b"8965B42170\x00\x00\x00\x00\x00\x00":
           ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.6], [0.1]]
