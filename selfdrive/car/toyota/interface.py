@@ -226,7 +226,7 @@ class CarInterface(CarInterfaceBase):
       ret.longitudinalTuning.kpV = [2.65, 1.5, 0.34]
       ret.longitudinalTuning.kiV = [0.54, 0.34]
       if spairrowtuning:
-        ret.steerActuatorDelay = 0.60
+        ret.steerActuatorDelay = 0.12
         ret.steerRatio = 15.33
         ret.steerLimitTimer = 5.0
         tire_stiffness_factor = 0.996  # not optimized yet
