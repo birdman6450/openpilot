@@ -274,6 +274,8 @@ class DynamicFollow:
       y = [self.sng_TR, interp(self.sng_speed, x_vel, y_dist)]
       TR = interp(self.car_data.v_ego, x, y)
 
+    return float(clip(TR, self.min_TR, 2.7))  
+      
     TR_mods = []
     # Dynamic follow modifications (the secret sauce)
     x = [-26.8224, -20.0288, -15.6871, -11.1965, -7.8645, -4.9472, -3.0541, -2.2244, -1.5045, -0.7908, -0.3196, 0.0, 0.5588, 1.3682, 1.898, 2.7316, 4.4704]  # relative velocity values
@@ -323,7 +325,7 @@ class DynamicFollow:
   def _get_live_params(self):
     self.global_df_mod = self.op_params.get('global_df_mod')
     if self.global_df_mod is not None:
-      self.global_df_mod = np.clip(self.global_df_mod, 0.85, 1.2)
+      self.global_df_mod = np.clip(self.global_df_mod, 0.70, 10.0)
 
     self.min_TR = self.op_params.get('min_TR')
     if self.min_TR is not None:
