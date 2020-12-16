@@ -196,7 +196,7 @@ class CarInterface(CarInterfaceBase):
 
     elif candidate in [CAR.COROLLA_TSS2, CAR.COROLLAH_TSS2]:
       stop_and_go = True
-      ret.minSpeedCan = 0.375
+      ret.minSpeedCan = 0.200
       ret.safetyParam = 50
       ret.wheelbase = 2.700
       ret.steerRatio = 15.33
