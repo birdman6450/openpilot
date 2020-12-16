@@ -308,10 +308,19 @@ class CarInterface(CarInterfaceBase):
       ret.longitudinalTuning.kpV = [1.2, 0.8, 0.5]
       ret.longitudinalTuning.kiV = [0.18, 0.12]
     else:
-      ret.gasMaxBP = [0.]
-      ret.gasMaxV = [0.5]
-      ret.longitudinalTuning.kpV = [3.6, 2.4, 1.5]
-      ret.longitudinalTuning.kiV = [0.54, 0.36]
+      # Testing different longitudinal settings, will apply to each car to get feedback
+      #ret.gasMaxBP = [0.]
+      #ret.gasMaxV = [0.5]
+      #ret.longitudinalTuning.kpV = [3.6, 2.4, 1.5]
+      #ret.longitudinalTuning.kiV = [0.54, 0.36]
+      # ================
+      ret.gasMaxBP = [0.] #[0., 2.2352, 20.1168, 33.528] # 0, 5, 45, 75 mph
+      ret.gasMaxV = [1.0] #[0.66, 0.3, 0.2, 0.075]
+      ret.longitudinalTuning.kpV = [1.0, 0.9, 0.8] #[1.4, 1.0, 0.8]
+      ret.longitudinalTuning.kiV = [0.14, 0.09] #[0.19, 0.12]
+      ret.stoppingBrakeRate = 0.1 #reach stopping point smoothly
+      #ret.startingBrakeRate = 2.0 #release brakes fast
+      # ================
 
     return ret
 
