@@ -1,11 +1,11 @@
 #include "ui.hpp"
+
 #include <assert.h>
 #include <map>
 #include <cmath>
 #include <iostream>
 #include "common/util.h"
 #include <algorithm>
-
 
 #define NANOVG_GLES3_IMPLEMENTATION
 #include "nanovg_gl.h"
@@ -73,10 +73,7 @@ static void draw_chevron(UIState *s, float x_in, float y_in, float sz,
     return;
   }
 
-  sz *= 30;
-  sz /= (x_in / 3 + 30);
-  if (sz > 30) sz = 30;
-  if (sz < 15) sz = 15;
+  sz = std::clamp((sz * 30) / (x_in / 3 + 30), 15.0f, 30.0f);
 
   // glow
   float g_xo = sz/5;
@@ -164,7 +161,7 @@ static void update_track_data(UIState *s, const cereal::ModelDataV2::XYZTData::R
 
   vertex_data *v = &pvd->v[0];
   const float margin = 500.0f;
-  for (int i = 0; line.getX()[i] <= path_length and i < TRAJECTORY_SIZE; i++) {
+  for (int i = 0; i < TRAJECTORY_SIZE and line.getX()[i] <= path_length; i++) {
     v += car_space_to_full_frame(s, line.getX()[i], -line.getY()[i] - off, -line.getZ()[i], &v->x, &v->y, margin);
     max_idx = i;
   }
@@ -225,7 +222,6 @@ static void update_line_data(UIState *s, const cereal::ModelDataV2::XYZTData::Re
   }
   pvd->cnt = v - pvd->v;
 }
-
 
 static void ui_draw_vision_lane_lines(UIState *s) {
   const UIScene *scene = &s->scene;
