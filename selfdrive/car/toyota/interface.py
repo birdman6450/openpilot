@@ -196,7 +196,7 @@ class CarInterface(CarInterfaceBase):
 
     elif candidate in [CAR.COROLLA_TSS2, CAR.COROLLAH_TSS2]:
       stop_and_go = True
-      ret.minSpeedCan = 0.200
+      ret.minSpeedCan = 0.250
       ret.safetyParam = 50
       ret.wheelbase = 2.700
       ret.steerRatio = 15.33
@@ -316,12 +316,15 @@ class CarInterface(CarInterfaceBase):
       # ================
       #ret.gasMaxBP = [0.] #[0., 2.2352, 20.1168, 33.528] # 0, 5, 45, 75 mph
       #ret.gasMaxV = [1.0] #[0.66, 0.3, 0.2, 0.075]
-      ret.longitudinalTuning.kpBP = [0., 5., 15., 35.]
-      ret.longitudinalTuning.kpV = [1.4, 1.0, 0.7, 0.5] #[1.4, 1.0, 0.8]
-      ret.longitudinalTuning.kiBP = [0., 10., 35.]
-      ret.longitudinalTuning.kiV = [0.17, 0.11, 0.07] #[0.19, 0.12]
+      ret.longitudinalTuning.deadzoneBP = [0., 8.05]
+      ret.longitudinalTuning.deadzoneV = [.0, .14]
+      ret.longitudinalTuning.kpBP = [0., 5., 20.]
+      ret.longitudinalTuning.kpV = [1.3, 1.0, 0.7]
+      ret.longitudinalTuning.kiBP = [0., 5., 12., 20., 27.] # 0, 11, 27, 45, 60
+      ret.longitudinalTuning.kiV = [.35, .23, .20, .17, .1]
       ret.stoppingBrakeRate = 0.1 # reach stopping point smoothly
       ret.startingBrakeRate = 2.0 # release brakes fast
+      ret.startAccel = 1.2 # Accelerate from 0 faster
       # ================
 
     return ret
