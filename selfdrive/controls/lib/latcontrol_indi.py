@@ -28,6 +28,8 @@ class LatControlINDI():
                   [7.29394177e+00, 1.39159419e-02],
                   [1.71022442e+01, 3.38495381e-02]])
 
+    self.speed = 0.
+
     self.K = K
     self.A_K = A - np.dot(K, C)
     self.x = np.array([[0.], [0.], [0.]])
