@@ -25,7 +25,7 @@ class CarInterface(CarInterfaceBase):
     ret.steerLimitTimer = 0.4
 
     # EXPERIMENTAL tune for all Toyota/Lexus models
-    ret.longitudinalTuning.deadzoneBP = [0., 8.05]
+    ret.longitudinalTuning.deadzoneBP = [0., 8.05] #
     ret.longitudinalTuning.deadzoneV = [.0, .14]
     ret.longitudinalTuning.kpBP = [0., 5., 20.]
     ret.longitudinalTuning.kpV = [1.3, 1.0, 0.7] #[1.3, 1.0, 0.75]
