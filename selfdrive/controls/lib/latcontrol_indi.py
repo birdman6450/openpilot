@@ -3,7 +3,7 @@ import numpy as np
 
 from cereal import log
 from common.realtime import DT_CTRL
-from common.numpy_fast import clip
+from common.numpy_fast import clip, interp
 from selfdrive.car.toyota.values import CarControllerParams
 from selfdrive.car import apply_toyota_steer_torque_limits
 from selfdrive.controls.lib.drive_helpers import get_steer_max
@@ -34,10 +34,10 @@ class LatControlINDI():
 
     self.enforce_rate_limit = CP.carName == "toyota"
 
-    self.RC = CP.lateralTuning.indi.timeConstant
-    self.G = CP.lateralTuning.indi.actuatorEffectiveness
-    self.outer_loop_gain = CP.lateralTuning.indi.outerLoopGain
-    self.inner_loop_gain = CP.lateralTuning.indi.innerLoopGain
+    self._RC = (CP.lateralTuning.indi.timeConstantBP, CP.lateralTuning.indi.timeConstantV)
+    self._G = (CP.lateralTuning.indi.actuatorEffectivenessBP, CP.lateralTuning.indi.actuatorEffectivenessV)
+    self._outer_loop_gain = (CP.lateralTuning.indi.outerLoopGainBP, CP.lateralTuning.indi.outerLoopGainV)
+    self._inner_loop_gain = (CP.lateralTuning.indi.innerLoopGainBP, CP.lateralTuning.indi.innerLoopGainV)
     self.alpha = 1. - DT_CTRL / (self.RC + DT_CTRL)
 
     self.sat_count_rate = 1.0 * DT_CTRL
@@ -45,10 +45,27 @@ class LatControlINDI():
 
     self.reset()
 
+  @property
+  def RC(self):
+    return interp(self.speed, self._RC[0], self._RC[1])
+
+  @property
+  def G(self):
+    return interp(self.speed, self._G[0], self._G[1])
+
+  @property
+  def outer_loop_gain(self):
+    return interp(self.speed, self._outer_loop_gain[0], self._outer_loop_gain[1])
+
+  @property
+  def inner_loop_gain(self):
+    return interp(self.speed, self._inner_loop_gain[0], self._inner_loop_gain[1])
+
   def reset(self):
     self.delayed_output = 0.
     self.output_steer = 0.
     self.sat_count = 0.0
+    self.speed = 0.
 
   def _check_saturation(self, control, check_saturation, limit):
     saturated = abs(control) == limit
@@ -63,6 +80,7 @@ class LatControlINDI():
     return self.sat_count > self.sat_limit
 
   def update(self, active, CS, CP, path_plan):
+    self.speed = CS.vEgo
     # Update Kalman filter
     y = np.array([[math.radians(CS.steeringAngle)], [math.radians(CS.steeringRate)]])
     self.x = np.dot(self.A_K, self.x) + np.dot(self.K, y)
