@@ -212,21 +212,21 @@ class CarInterface(CarInterfaceBase):
     elif candidate in [CAR.COROLLA_TSS2, CAR.COROLLAH_TSS2]:
       stop_and_go = True
       ret.safetyParam = 50
-      ret.wheelbase = 2.700
+      ret.wheelbase = 2.63906
       ret.steerRatio = 15.33
       tire_stiffness_factor = 0.996  # 3055 is mean between SE/LE/Hybrid
       ret.mass = 3055. * CV.LB_TO_KG + STD_CARGO_KG
       # Lateral tune
       ret.lateralTuning.init('indi')
-      ret.lateralTuning.indi.innerLoopGainBP = [0.]
-      ret.lateralTuning.indi.innerLoopGainV = [7.25]
-      ret.lateralTuning.indi.outerLoopGainBP = [0.]
-      ret.lateralTuning.indi.outerLoopGainV = [6.5]
-      ret.lateralTuning.indi.timeConstantBP = [0.]
-      ret.lateralTuning.indi.timeConstantV = [1.83]
-      ret.lateralTuning.indi.actuatorEffectivenessBP = [0.]
-      ret.lateralTuning.indi.actuatorEffectivenessV = [2.0]
-      ret.steerActuatorDelay = 0.2
+      ret.lateralTuning.indi.innerLoopGainBP = [18, 22, 26]
+      ret.lateralTuning.indi.innerLoopGainV = [5, 10, 15]
+      ret.lateralTuning.indi.outerLoopGainBP = [18, 22, 26]
+      ret.lateralTuning.indi.outerLoopGainV = [4, 9, 14.99]
+      ret.lateralTuning.indi.timeConstantBP = [18, 22, 24]
+      ret.lateralTuning.indi.timeConstantV = [2, 4, 5.5]
+      ret.lateralTuning.indi.actuatorEffectivenessBP = [18, 22, 26]
+      ret.lateralTuning.indi.actuatorEffectivenessV = [5, 10, 15]
+      ret.steerActuatorDelay = 0.4
 
     elif candidate in [CAR.LEXUS_ES_TSS2, CAR.LEXUS_ESH_TSS2]:
       stop_and_go = True
@@ -298,7 +298,7 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.35], [0.15]]
       ret.lateralTuning.pid.kf = 0.00007818594
 
-    ret.steerRateCost = 1.
+    ret.steerRateCost = 0.5
     ret.centerToFront = ret.wheelbase * 0.44
 
     # TODO: get actual value, for now starting with reasonable value for
