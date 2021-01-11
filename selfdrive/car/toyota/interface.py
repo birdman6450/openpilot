@@ -32,7 +32,7 @@ class CarInterface(CarInterfaceBase):
     ret.longitudinalTuning.kpV = [1.3, 1.0, 0.7] #[1.3, 1.0, 0.75]
     ret.longitudinalTuning.kiBP = [0., 5., 12., 20., 27.] # 0, 11, 27, 45, 60
     ret.longitudinalTuning.kiV = [.35, .23, .20, .17, .1] #[.35, .3, .25, .2, .12]
-    ret.stoppingBrakeRate = 0.1 # reach stopping point smoothly
+    ret.stoppingBrakeRate = 0.1 # reach stopping point smoothlyy
     ret.startingBrakeRate = 2.0 # release brakes fast
     ret.startAccel = 1.2 # Accelerate from 0 faster
 
