@@ -92,12 +92,12 @@ class opParams:
                         'dynamic_camera_offset_time': Param(3.5, VT.number, 'How long to keep away from oncoming traffic in seconds after losing lead'),
                         'support_white_panda': Param(False, bool, 'Enable this to allow engagement with the deprecated white panda.\n'
                                                                   'localizer might not work correctly'),
-                        'slowdown_for_curves': Param(True, bool, 'Whether your car will slow down for curves using the old planner code from 0.5/0.6'),
-                        'steer_fault_fix': Param(True, bool, live=True),
+                        'slowdown_for_curves': Param(False, bool, 'Whether your car will slow down for curves using the old planner code from 0.5/0.6'),
+                        'steer_fault_fix': Param(False, bool, live=True),
 
                         'prius_use_pid': Param(False, bool, 'This enables the PID lateral controller with new a experimental derivative tune\nFalse: stock INDI, True: TSS2-tuned PID'),
                         'use_lqr': Param(False, bool, 'Enable this to use LQR as your lateral controller over default with any car'),
-                        'corollaTSS2_use_indi': Param(False, bool, 'Enable this to use INDI for lat with your TSS2 Corolla'),
+                        'corollaTSS2_use_indi': Param(True, bool, 'Enable this to use INDI for lat with your TSS2 Corolla'),
                         'rav4TSS2_use_indi': Param(False, bool, 'Enable this to use INDI for lat with your TSS2 RAV4'),
                         'standstill_hack': Param(False, bool, 'Some cars support stop and go, you just need to enable this')}
 
