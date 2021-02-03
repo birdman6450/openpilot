@@ -329,6 +329,6 @@ class DynamicFollow:
 
     self.min_TR = self.op_params.get('min_TR')
     if self.min_TR is not None:
-      self.min_TR = clip(self.min_TR, 0.85, 1.3)
+      self.min_TR = clip(self.min_TR, 0.85, 9.99)
     else:
       self.min_TR = 0.9  # default
